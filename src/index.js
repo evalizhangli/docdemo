@@ -1,12 +1,9 @@
 import React from 'react';
+
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import TodoList from './TodoList';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// jsx语法，使用这种语法，必须要引入'react'
+ReactDOM.render(<TodoList />, document.getElementById('root'));
+
