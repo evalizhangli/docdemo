@@ -1,52 +1,59 @@
-import React, { Component } from 'react'
-import 'antd/dist/antd.css'
-import TodoListUI from './TodoListUI'
-import store from './store';
-import { getInputChangeAction, getAddTodoItemAction, getDeleteItemAction } from './store/actionCreators'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';//核心API
+import {changeInpuValue, addItem } from './store/action'
+import CustomSwitch from "./CustomSwitch";
+import {Button} from "antd";
+import CustomDialog from './CustomDialog'
 
-class TodoList extends Component{
+const TodoList = (props) => {
+    const {inputValue,list,changeInputValue,handleClick} = props;
 
+    return (
+        <div>
+            <div>
+                <input value={inputValue} onChange={changeInputValue}/>
+                <button onClick={handleClick}>提交</button>
+            </div>
+            <ul>
+                {
+                    list.map((item, index) => {
+                        return <li key={index}>{item}</li>
+                    })
+                }
+            </ul>
+            <CustomSwitch/>
+            <div>
+                <Button type="primary">Primary</Button>
+                <Button>Default</Button>
+                <Button type="dashed">Dashed</Button>
+                <Button type="danger">Danger</Button>
+            </div>
+            <CustomDialog></CustomDialog>
+        </div>
+    )
+}
 
-    constructor(props){
-        super(props);
-        this.state = store.getState();
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleStoreChange = this.handleStoreChange.bind(this);
-        store.subscribe(this.handleStoreChange);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleItemClickDelete = this.handleItemClickDelete.bind(this);
-    }
-
-    render() {
-        return (
-            <TodoListUI
-                inputValue={this.state.inputValue}
-                list={this.state.list}
-                handleInputChange={this.handleInputChange}
-                handleClick={this.handleClick}
-                handleItemClickDelete={this.handleItemClickDelete}
-            />
-        )
-    }
-
-    handleInputChange(e) {
-      const action = getInputChangeAction(e.target.value);
-      store.dispatch(action);
-    }
-
-    handleStoreChange() {
-      this.setState(store.getState());
-    }
-
-    handleClick() {
-      const action = getAddTodoItemAction();
-      store.dispatch(action)
-    }
-
-    handleItemClickDelete (index) {
-      const action = getDeleteItemAction(index);
-      store.dispatch(action);
+const mapStateToProps = (state) => {
+    return {
+        inputValue:state.inputValue,
+        list: state.list
     }
 }
 
-export default TodoList;
+const mapDispatchToProps = (dispatch) => {
+        return {
+            changeInputValue (e){
+                const action = changeInpuValue(e.target.value);
+                dispatch(action)
+            },
+            handleClick() {
+                const action = addItem();
+                dispatch(action)
+            }
+        }
+}
+
+//connect是做连接，这个组件和store做连接
+//TodoList其实是一个UI组件
+//但是这段代码connect执行生成的结果返回的是一个容器组件
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
