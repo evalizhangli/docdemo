@@ -11,6 +11,6 @@ css:https://github.com/twbs/bootstrap.git
 npm install redoc
 ```
 [doc json](https://github.com/evalizhangli/API-GW-Theme/blob/master/src/evainfo.json)
-
+api 管理
 
 
