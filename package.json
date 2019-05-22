@@ -4,18 +4,24 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.8.2",
-    "antd": "^3.12.1",
+    "antd": "^3.16.6",
     "axios": "^0.18.0",
     "material-ui": "^0.20.2",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "mobx": "^4.9.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-eva-doc": "^1.0.1",
+    "react-json-viewer": "^2.1.0",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "react-tagsinput": "^3.19.0",
     "react-transition-group": "^2.5.2",
+    "redoc": "^2.0.0-rc.8-1",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "PORT=9000 react-scripts start",
